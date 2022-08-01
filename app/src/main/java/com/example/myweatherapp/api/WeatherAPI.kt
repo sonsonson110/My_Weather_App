@@ -7,6 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Query
 
 private const val BASE_URL = "https://weatherapi-com.p.rapidapi.com"
 //giao tiếp với server
@@ -15,8 +16,10 @@ interface WeatherAPI {
         "X-RapidAPI-Key: 2a80c97814msh98c8e99b73672adp118373jsn5db1f18d86c2",
         "X-RapidAPI-Host: weatherapi-com.p.rapidapi.com"
     )
-    @GET("current.json?q=Hanoi")
-    suspend fun getLocationDetail() : ApiData
+    @GET("current.json")
+    suspend fun getLocationDetail(
+        @Query("q") q: String
+    ) : ApiData
 }
 //build
 private val moshi = Moshi.Builder()

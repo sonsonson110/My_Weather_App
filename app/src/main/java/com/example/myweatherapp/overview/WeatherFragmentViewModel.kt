@@ -10,17 +10,13 @@ import kotlinx.coroutines.launch
 class WeatherFragmentViewModel : ViewModel() {
 
     //LiveData response
-    private val _myResponse = MutableLiveData<String>("")
+    private val _myResponse = MutableLiveData<String>("Hi")
     val myResponse: LiveData<String> = _myResponse
 
-    init {
-        getData()
-    }
-
-    private fun getData() {
+    fun getData(customLocation: String) {
         viewModelScope.launch {
             try {
-                val response = RetrofitInstance.retrofitService.getLocationDetail()
+                val response = RetrofitInstance.retrofitService.getLocationDetail(customLocation)
                 _myResponse.value = response.location?.name!!
             } catch (e: Exception) {
                 _myResponse.value = "Fetching failure"
