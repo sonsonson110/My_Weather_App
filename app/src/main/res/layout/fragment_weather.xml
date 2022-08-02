@@ -33,39 +33,44 @@
             android:id="@+id/editText"
             android:layout_width="254dp"
             android:layout_height="54dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:ems="10"
             android:hint="@string/type_city_name"
+            android:importantForAutofill="no"
             android:inputType="textPersonName"
             android:text="@null"
+            android:textColorHint="#757575"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:importantForAutofill="no" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/locationDetails"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="412dp"
+            android:layout_height="134dp"
             android:layout_marginTop="50dp"
             android:background="#A9C1B1B1"
+            android:gravity="center|center_horizontal"
             android:padding="4dp"
+            android:text="@{viewModel.location}"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/get_by_city_name"
-            tools:text="Some location details..."
-            android:text="@{viewModel.city}"/>
+            tools:text="Some location details..." />
 
         <TextView
             android:id="@+id/weatherInfo"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="#DAB4B4"
+            android:layout_height="431dp"
+            android:background="#B37A7A"
+            android:gravity="end"
             android:padding="8dp"
-            android:textSize="24sp"
+            android:text="@{viewModel.weather}"
+            android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/locationDetails"
             tools:text="Some weather info..." />
@@ -74,14 +79,15 @@
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#1565C0"
             android:textSize="34sp"
+            app:apiStatus="@{viewModel.status}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/get_by_city_name"
-            tools:text="Some sync message"
-            android:text="@{viewModel.status.toString()}"/>
+            tools:text="Some sync message" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
