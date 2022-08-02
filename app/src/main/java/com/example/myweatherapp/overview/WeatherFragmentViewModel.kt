@@ -35,7 +35,7 @@ class WeatherFragmentViewModel : ViewModel() {
                 //full response data
                 val response = RetrofitInstance.retrofitService.getLocationDetail(customLocation)
 
-                //add text to detail
+                //add text to location detail
                 val city = response.location?.name.toString()
                 val country = response.location?.country.toString()
                 val timeZone = response.location?.tzId.toString()
@@ -46,6 +46,7 @@ class WeatherFragmentViewModel : ViewModel() {
                         "Sync At: $localTime"
                 _location.value = locationDetails
                 //add text to weather info
+                // TODO: remodel this 
                 val lastUpdated = response.current?.lastUpdated.toString()
                 val tempC = response.current?.tempC.toString()
                 val feelC = response.current?.feelslikeC.toString()
