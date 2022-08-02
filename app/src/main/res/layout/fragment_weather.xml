@@ -77,14 +77,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
-            android:layout_height="426dp"
+            android:layout_height="0dp"
             android:background="#E36158"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/locationDetails"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toBottomOf="@+id/locationDetails">
 
             <ImageView
                 android:id="@+id/forecast_icon"
@@ -102,115 +100,122 @@
                 android:layout_width="255dp"
                 android:layout_height="120dp"
                 android:layout_marginEnd="16dp"
-                android:gravity="right"
-                android:textSize="24sp"
+                android:gravity="center|right"
+                android:text="@{viewModel.weather}"
+                android:textSize="19sp"
                 app:layout_constraintBottom_toBottomOf="@+id/forecast_icon"
                 app:layout_constraintEnd_toStartOf="@+id/forecast_icon"
                 app:layout_constraintTop_toTopOf="@+id/forecast_icon"
                 tools:text="Weather main info" />
 
             <TableLayout
-                android:layout_width="0dp"
-                android:layout_height="296dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:background="#6BCD8FA4"
                 android:padding="8dp"
-                android:stretchColumns="*"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/forecast_icon">
+                app:layout_constraintTop_toBottomOf="@+id/forecast_icon"
+                android:stretchColumns="1">
 
                 <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:textColor="#212121"
-                        tools:text="Cloud" />
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:textColor="#212121"
-                        tools:text="wind_kph" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:textColor="#212121"
-                        tools:text="Humidity" />
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:textColor="#212121"
-                        tools:text="wind_degree" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:textColor="#212121"
-                        tools:text="UV level" />
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:textColor="#212121"
-                        tools:text="wind_dir" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:textColor="#212121"
-                        tools:text="Feels like" />
-
-                    <TextView
-                        android:layout_weight="1"
-                        android:textColor="#212121"
-                        tools:text="vis_km" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:padding="8dp"
                     android:layout_weight="1">
 
                     <TextView
-                        android:layout_weight="1"
-                        android:gravity="end"
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
                         android:textColor="#212121"
-                        tools:text="Last updated: 00:00 am" />
+                        tools:text="Cloud"
+                        android:text="@{viewModel.cloud}"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:textColor="#212121"
+                        tools:text="wind_kph"
+                        android:text="@{viewModel.wind}" />
                 </TableRow>
 
                 <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="7"
+                    android:layout_weight="1"
                     android:padding="8dp">
 
-                    <ImageView
-                        android:id="@+id/weather_api"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:textColor="#212121"
+                        tools:text="Humidity"
+                        android:text="@{viewModel.humidity}"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:textColor="#212121"
+                        tools:text="wind_degree"
+                        android:text="@{viewModel.windDeg}"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_weight="1"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:textColor="#212121"
+                        tools:text="UV level"
+                        android:text="@{viewModel.uv}"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:textColor="#212121"
+                        tools:text="wind_dir"
+                        android:text="@{viewModel.windDir}"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_weight="1"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:textColor="#212121"
+                        tools:text="UV critical"
+                        android:text="@{viewModel.uvInfo}"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:textColor="#212121"
+                        tools:text="vis_km"
+                        android:text="@{viewModel.vision}"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_weight="1"
+                    android:padding="8dp">
+
+                    <TextView
                         android:layout_weight="1"
-                        tools:ignore="ContentDescription"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        android:gravity="end|center"
+                        android:textColor="#212121"
+                        tools:text="Last updated: 00:00 am"
+                        android:text="@{viewModel.lastUpdated}"/>
+                </TableRow>
+
+                <TableRow
+                    android:layout_weight="2"
+                    android:padding="8dp">
+
+                    <Button
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_weight="1"
+                        android:text="More Weather Details"
+                        android:textColor="#C8CCE6" />
                 </TableRow>
             </TableLayout>
 
