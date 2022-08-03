@@ -50,12 +50,10 @@
             android:layout_width="0dp"
             android:layout_height="135dp"
             android:layout_marginTop="50dp"
-            android:background="#A9C1B1B1"
             android:gravity="center|center_horizontal"
             android:padding="4dp"
             android:text="@{viewModel.location}"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/get_by_city_name"
@@ -76,13 +74,24 @@
             tools:text="Some sync message" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_info"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="#E36158"
+            android:background="#00494645"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/locationDetails">
+
+            <View
+                android:layout_width="300dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="3dp"
+                android:background="#FFFFFF"
+                app:layout_constraintBottom_toTopOf="@+id/main_weather_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <ImageView
                 android:id="@+id/forecast_icon"
@@ -93,7 +102,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ContentDescription,ImageContrastCheck"
-                tools:srcCompat="@drawable/_13" />
+                app:srcCompat="@drawable/_13"
+                app:imageUrl="@{viewModel.photo}"/>
 
             <TextView
                 android:id="@+id/main_weather_info"
@@ -108,118 +118,169 @@
                 app:layout_constraintTop_toTopOf="@+id/forecast_icon"
                 tools:text="Weather main info" />
 
+            <View
+                android:layout_width="300dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="3dp"
+                android:background="#FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_weather_info"/>
+
             <TableLayout
+                android:layout_marginTop="10dp"
+                android:id="@+id/table_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="#6BCD8FA4"
                 android:padding="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/forecast_icon"
-                android:stretchColumns="1">
+                app:layout_constraintTop_toBottomOf="@+id/forecast_icon">
 
                 <TableRow
-                    android:padding="8dp"
+                    android:layout_margin="4dp"
                     android:layout_weight="1">
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="3"
-                        android:textColor="#212121"
-                        tools:text="Cloud"
-                        android:text="@{viewModel.cloud}"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="2"
-                        android:textColor="#212121"
-                        tools:text="wind_kph"
-                        android:text="@{viewModel.wind}" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_weight="1"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="3"
-                        android:textColor="#212121"
-                        tools:text="Humidity"
-                        android:text="@{viewModel.humidity}"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="2"
-                        android:textColor="#212121"
-                        tools:text="wind_degree"
-                        android:text="@{viewModel.windDeg}"/>
-                </TableRow>
-
-                <TableRow
-                    android:layout_weight="1"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="3"
-                        android:textColor="#212121"
-                        tools:text="UV level"
-                        android:text="@{viewModel.uv}"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="2"
-                        android:textColor="#212121"
-                        tools:text="wind_dir"
-                        android:text="@{viewModel.windDir}"/>
-                </TableRow>
-
-                <TableRow
-                    android:layout_weight="1"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="3"
-                        android:textColor="#212121"
-                        tools:text="UV critical"
-                        android:text="@{viewModel.uvInfo}"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="2"
-                        android:textColor="#212121"
-                        tools:text="vis_km"
-                        android:text="@{viewModel.vision}"/>
-                </TableRow>
-
-                <TableRow
-                    android:layout_weight="1"
-                    android:padding="8dp">
-
-                    <TextView
                         android:layout_weight="1"
-                        android:gravity="end|center"
-                        android:textColor="#212121"
-                        tools:text="Last updated: 00:00 am"
-                        android:text="@{viewModel.lastUpdated}"/>
+                        android:text="Cloud" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{viewModel.cloud}" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Humidity" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{viewModel.humidity}" />
                 </TableRow>
 
                 <TableRow
-                    android:layout_weight="2"
-                    android:padding="8dp">
+                    android:layout_margin="4dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Wind speed" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{viewModel.wind}" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Vision" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{viewModel.vision}" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_margin="4dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Wind direction" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{viewModel.windDir}" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="UV Level" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{viewModel.uv}" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_margin="4dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="Wind degree" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{viewModel.cloud}" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="UV Impact" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{viewModel.uvInfo}" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_margin="4dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_weight="4"
+                        android:gravity="right"
+                        android:text="Last updated" />
+
+                    <TextView
+                        android:layout_weight="4"
+                        android:gravity="right"
+                        android:text="@{viewModel.lastUpdated}" />
+                </TableRow>
+
+                <TableRow android:layout_weight="3">
 
                     <Button
                         style="?attr/materialButtonOutlinedStyle"
                         android:layout_weight="1"
-                        android:text="More Weather Details"
-                        android:textColor="#C8CCE6" />
+                        android:text="More Detail" />
                 </TableRow>
             </TableLayout>
 
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="300dp"
+            android:layout_height="2dp"
+            android:background="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/locationDetails"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/message" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

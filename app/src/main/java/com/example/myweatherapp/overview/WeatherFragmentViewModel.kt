@@ -25,27 +25,30 @@ class WeatherFragmentViewModel : ViewModel() {
     val location: LiveData<String> = _location
 
     //weather info main text
-    private val _weather = MutableLiveData<String>()
+    private val _weather = MutableLiveData<String>("...")
     val weather: LiveData<String> = _weather
+    //weather picture
+    private val _photo = MutableLiveData<String>()
+    val photo: LiveData<String> = _photo
 
     //weather properties
-    private val _lastUpdated = MutableLiveData<String>()
+    private val _lastUpdated = MutableLiveData<String>("...")
     val lastUpdated: LiveData<String> = _lastUpdated
-    private val _wind = MutableLiveData<String>()
+    private val _wind = MutableLiveData<String>("...")
     val wind: LiveData<String> = _wind
-    private val _windDeg = MutableLiveData<String>()
+    private val _windDeg = MutableLiveData<String>("...")
     val windDeg: LiveData<String> = _windDeg
-    private val _windDir = MutableLiveData<String>()
+    private val _windDir = MutableLiveData<String>("...")
     val windDir: LiveData<String> = _windDir
-    private val _humidity = MutableLiveData<String>()
+    private val _humidity = MutableLiveData<String>("...")
     val humidity: LiveData<String> = _humidity
-    private val _cloud = MutableLiveData<String>()
+    private val _cloud = MutableLiveData<String>("...")
     val cloud: LiveData<String> = _cloud
-    private val _uv = MutableLiveData<String>()
+    private val _uv = MutableLiveData<String>("...")
     val uv: LiveData<String> = _uv
-    private val _uvInfo = MutableLiveData<String>()
+    private val _uvInfo = MutableLiveData<String>("...")
     val uvInfo: LiveData<String> = _uvInfo
-    private val _vision = MutableLiveData<String>()
+    private val _vision = MutableLiveData<String>("...")
     val vision: LiveData<String> = _vision
 
 
@@ -66,6 +69,7 @@ class WeatherFragmentViewModel : ViewModel() {
                         "Time Zone: $timeZone\n" +
                         "Sync At: $localTime"
                 _location.value = locationDetails
+                _photo.value = response.current?.condition?.icon!!
                 //update text of weather info properties
                 _lastUpdated.value = response.current?.lastUpdated!!
                 _wind.value = response.current?.windKph.toString()
