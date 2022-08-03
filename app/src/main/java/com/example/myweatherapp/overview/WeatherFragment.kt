@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.myweatherapp.databinding.FragmentWeatherBinding
 
 
 class WeatherFragment : Fragment() {
     //viewModel
-    private val viewModel: WeatherFragmentViewModel by viewModels()
+    private val sharedViewModel: WeatherFragmentViewModel by viewModels()
 
     private lateinit var binding: FragmentWeatherBinding
 
@@ -33,7 +34,7 @@ class WeatherFragment : Fragment() {
         binding = FragmentWeatherBinding.inflate(inflater, container, false)
         //binding layout element
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
+        binding.viewModel = sharedViewModel
         binding.weatherFragment = this@WeatherFragment
 
         return binding.root //view
@@ -42,7 +43,7 @@ class WeatherFragment : Fragment() {
     fun onButtonClick() {
         //apply api request w/ your location
         val customLocation = binding.editText.text.toString()
-        viewModel.getData(customLocation)
+        sharedViewModel.getData(customLocation)
     }
 
 }

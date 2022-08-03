@@ -16,7 +16,7 @@ fun bindStatus(statusTextView: TextView, status: CurrentStatus?) {
         statusTextView.text = "Fetching data..."
     }
     else if (status == CurrentStatus.DONE) {
-        statusTextView.visibility = View.GONE
+        statusTextView.visibility = View.INVISIBLE
     }
     else if (status == CurrentStatus.ERROR) {
         statusTextView.visibility = View.VISIBLE

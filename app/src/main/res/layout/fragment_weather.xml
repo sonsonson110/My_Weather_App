@@ -232,7 +232,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@{viewModel.cloud}" />
+                        android:text="@{viewModel.windDeg}" />
 
                     <TextView
                         android:layout_width="0dp"
