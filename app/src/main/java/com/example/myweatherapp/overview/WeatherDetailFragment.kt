@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myweatherapp.databinding.FragmentWeatherDetailBinding
 
 class WeatherDetailFragment : Fragment() {
@@ -27,8 +28,8 @@ class WeatherDetailFragment : Fragment() {
         binding.recyclerView.apply {
             adapter = DaysDetailAdapter()
             setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(requireContext())
         }
-
         return binding.root
     }
 }

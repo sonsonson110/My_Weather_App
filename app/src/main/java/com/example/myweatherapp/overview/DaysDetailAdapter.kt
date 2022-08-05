@@ -14,13 +14,14 @@ class DaysDetailAdapter :
     class DaysDetailViewHolder(private var binding: WeatherDetailItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(forecastday: Forecastday) {
-            binding.date.text = forecastday.date
+            binding.day = forecastday
+            binding.executePendingBindings()
         }
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<Forecastday>() {
         override fun areItemsTheSame(oldItem: Forecastday, newItem: Forecastday): Boolean {
-            return oldItem.date == newItem.date
+            return oldItem.dateEpoch == newItem.dateEpoch
         }
 
         override fun areContentsTheSame(oldItem: Forecastday, newItem: Forecastday): Boolean {
