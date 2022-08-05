@@ -9,8 +9,6 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.myweatherapp.model.ApiData
-import com.example.myweatherapp.model.Forecast
-import com.example.myweatherapp.model.Forecastday
 import com.example.myweatherapp.overview.CurrentStatus
 import com.example.myweatherapp.overview.DaysDetailAdapter
 

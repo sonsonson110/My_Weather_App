@@ -7,8 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myweatherapp.api.RetrofitInstance
 import com.example.myweatherapp.model.ApiData
-import com.example.myweatherapp.model.Forecast
-import com.example.myweatherapp.model.Forecastday
 import kotlinx.coroutines.launch
 
 //sync status
