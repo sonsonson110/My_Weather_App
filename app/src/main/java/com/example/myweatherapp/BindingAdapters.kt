@@ -1,13 +1,18 @@
 package com.example.myweatherapp
 
-import android.media.Image
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.myweatherapp.model.ApiData
+import com.example.myweatherapp.model.Forecast
+import com.example.myweatherapp.model.Forecastday
 import com.example.myweatherapp.overview.CurrentStatus
+import com.example.myweatherapp.overview.DaysDetailAdapter
 
 @BindingAdapter("apiStatus")
 fun bindStatus(statusTextView: TextView, status: CurrentStatus?) {
@@ -16,7 +21,7 @@ fun bindStatus(statusTextView: TextView, status: CurrentStatus?) {
         statusTextView.text = "Fetching data..."
     }
     else if (status == CurrentStatus.DONE) {
-        statusTextView.visibility = View.INVISIBLE
+        statusTextView.visibility = View.GONE
     }
     else if (status == CurrentStatus.ERROR) {
         statusTextView.visibility = View.VISIBLE
@@ -30,4 +35,12 @@ fun bindImg(imgView: ImageView, imgUrl: String?) {
         val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
         imgView.load(imgUri)
     }
+}
+
+@BindingAdapter("listData")
+fun bindRecyclerView(recyclerView: RecyclerView, data: ApiData?) {
+    val adapter = recyclerView.adapter as DaysDetailAdapter
+    val listData = data?.forecast?.forecastday
+    adapter.submitList(listData)
+    Log.d("DATAFORRECYCLERVIEW", "${listData?.get(0)}")
 }

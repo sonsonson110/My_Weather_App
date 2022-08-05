@@ -5,15 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.myweatherapp.R
 import com.example.myweatherapp.databinding.FragmentWeatherBinding
 
 
 class WeatherFragment : Fragment() {
     //viewModel
-    private val sharedViewModel: WeatherFragmentViewModel by viewModels()
+    private val sharedViewModel: WeatherFragmentViewModel by activityViewModels()
 
     private lateinit var binding: FragmentWeatherBinding
 
@@ -31,19 +33,27 @@ class WeatherFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentWeatherBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_weather,container, false)
+        return binding.root //view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         //binding layout element
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = sharedViewModel
         binding.weatherFragment = this@WeatherFragment
-
-        return binding.root //view
+        binding.daysDetail.setOnClickListener { onDetailButtonClick() }
     }
 
     fun onButtonClick() {
         //apply api request w/ your location
         val customLocation = binding.editText.text.toString()
-        sharedViewModel.getData(customLocation)
+        sharedViewModel.getMainData(customLocation)
+    }
+
+    private fun onDetailButtonClick() {
+        findNavController().navigate(R.id.action_weatherFragment_to_weatherDetailFragment)
     }
 
 }

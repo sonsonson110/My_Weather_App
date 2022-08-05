@@ -6,16 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myweatherapp.api.RetrofitInstance
+import com.example.myweatherapp.model.ApiData
+import com.example.myweatherapp.model.Forecast
+import com.example.myweatherapp.model.Forecastday
 import kotlinx.coroutines.launch
 
 //sync status
 enum class CurrentStatus { LOADING, DONE, ERROR }
 
 class WeatherFragmentViewModel : ViewModel() {
-
-   /* //LiveData response
-    private val _myResponse = MutableLiveData<ApiData>()
-    val myResponse: LiveData<ApiData> = _myResponse*/
 
     //sync progress
     private val _status = MutableLiveData<CurrentStatus>()
@@ -26,7 +25,7 @@ class WeatherFragmentViewModel : ViewModel() {
     val location: LiveData<String> = _location
 
     //weather info main text
-    private val _weather = MutableLiveData<String>("...")
+    private val _weather = MutableLiveData("...")
     val weather: LiveData<String> = _weather
     //weather picture
     private val _photo = MutableLiveData<String>()
@@ -52,8 +51,8 @@ class WeatherFragmentViewModel : ViewModel() {
     private val _vision = MutableLiveData<String>("...")
     val vision: LiveData<String> = _vision
 
-
-    fun getData(customLocation: String) {
+    //get data cho frag đầu
+    fun getMainData(customLocation: String) {
         viewModelScope.launch {
             _status.value = CurrentStatus.LOADING
             try {
@@ -79,7 +78,7 @@ class WeatherFragmentViewModel : ViewModel() {
                 _humidity.value = response.current.humidity.toString()
                 _cloud.value = response.current.cloud.toString()
                 _uv.value = response.current.uv.toString()
-                _vision.value = response.current.visKm.toString()
+                _vision.value = response.current.visKm
                 _uvInfo.value = if (uv.value!!.toInt() < 6) "Friendly" else "Harmful"
                 //main weather text
                 val condition = response.current.condition.text
@@ -98,6 +97,25 @@ class WeatherFragmentViewModel : ViewModel() {
             } catch (e: Exception) {
                 _status.value = CurrentStatus.ERROR
                 Log.d("MAIN", "${e.message}")
+            }
+        }
+    }
+
+    //get data cho frag days
+    private val _forecastdayList = MutableLiveData<ApiData>()
+    val forecastdayList: LiveData<ApiData> = _forecastdayList
+
+
+    fun getDaysData() {
+        viewModelScope.launch {
+            _status.value = CurrentStatus.LOADING
+            try {
+                //get response
+                val response = RetrofitInstance.retrofitService.getForecast()
+                _forecastdayList.value = response
+                _status.value = CurrentStatus.DONE
+            } catch (e: Exception) {
+                _status.value = CurrentStatus.ERROR
             }
         }
     }

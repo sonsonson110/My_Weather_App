@@ -9,8 +9,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.myweatherapp.databinding.FragmentWeatherDetailBinding
 
 class WeatherDetailFragment : Fragment() {
-    //set xml to data binding first
-    private lateinit var binding: FragmentWeatherDetailBinding
+
     //shared view model
     private val sharedViewModel: WeatherFragmentViewModel by activityViewModels()
 
@@ -19,16 +18,18 @@ class WeatherDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentWeatherDetailBinding.inflate(inflater, container, false)
+        val binding = FragmentWeatherDetailBinding.inflate(inflater)
+
+        sharedViewModel.getDaysData()
+
+        binding.lifecycleOwner = this
+        binding.viewModel = sharedViewModel
+        binding.recyclerView.apply {
+            adapter = DaysDetailAdapter()
+            setHasFixedSize(true)
+        }
+
         return binding.root
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.apply {
-            lifecycleOwner = viewLifecycleOwner
-            viewModel = sharedViewModel
-        }
-    }
-
 }
+// TODO: Fix the recyclerView layout!! 

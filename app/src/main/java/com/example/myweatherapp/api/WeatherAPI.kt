@@ -1,6 +1,8 @@
 package com.example.myweatherapp.api
 
 import com.example.myweatherapp.model.ApiData
+import com.example.myweatherapp.model.Forecast
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -18,6 +20,13 @@ interface WeatherAPI {
     suspend fun getLocationDetail(
         @Query("q") q: String
     ) : ApiData
+
+    @Headers(
+        "X-RapidAPI-Key: 2a80c97814msh98c8e99b73672adp118373jsn5db1f18d86c2",
+        "X-RapidAPI-Host: weatherapi-com.p.rapidapi.com"
+    )
+    @GET("forecast.json?q=hanoi&days=5")
+    suspend fun getForecast() : ApiData
 }
 //build
 private val retrofit = Retrofit.Builder()
