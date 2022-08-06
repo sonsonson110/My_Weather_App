@@ -17,6 +17,6 @@
     <fragment
         android:id="@+id/weatherDetailFragment"
         android:name="com.example.myweatherapp.overview.WeatherDetailFragment"
-        android:label="WeatherDetailFragment"
+        android:label="Daily weather"
         tools:layout="@layout/fragment_weather_detail"/>
 </navigation>

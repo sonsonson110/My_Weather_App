@@ -21,8 +21,6 @@ class WeatherDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding = FragmentWeatherDetailBinding.inflate(inflater)
 
-        sharedViewModel.getDaysData()
-
         binding.lifecycleOwner = this
         binding.viewModel = sharedViewModel
         binding.recyclerView.apply {
@@ -33,4 +31,3 @@ class WeatherDetailFragment : Fragment() {
         return binding.root
     }
 }
-// TODO: Fix the recyclerView layout!! 

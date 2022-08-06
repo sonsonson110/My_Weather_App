@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myweatherapp.api.RetrofitInstance
 import com.example.myweatherapp.model.ApiData
+import com.example.myweatherapp.model.Forecastday
 import kotlinx.coroutines.launch
 
 //sync status
@@ -30,7 +31,7 @@ class WeatherFragmentViewModel : ViewModel() {
     val photo: LiveData<String> = _photo
 
     //weather properties
-    private val _lastUpdated = MutableLiveData<String>("...")
+    private val _lastUpdated = MutableLiveData<String>()
     val lastUpdated: LiveData<String> = _lastUpdated
     private val _wind = MutableLiveData("...")
     val wind: LiveData<String> = _wind
@@ -100,16 +101,16 @@ class WeatherFragmentViewModel : ViewModel() {
     }
 
     //get data cho frag days
-    private val _forecastdayList = MutableLiveData<ApiData>()
-    val forecastdayList: LiveData<ApiData> = _forecastdayList
+    private val _forecastdayList = MutableLiveData<ArrayList<Forecastday>>()
+    val forecastdayList: LiveData<ArrayList<Forecastday>> = _forecastdayList
 
 
-    fun getDaysData() {
+    fun getDaysData(customLocation: String) {
         viewModelScope.launch {
             _status.value = CurrentStatus.LOADING
             try {
                 //get response
-                val response = RetrofitInstance.retrofitService.getForecast()
+                val response = RetrofitInstance.retrofitService.getForecast(customLocation).forecast.forecastday
                 _forecastdayList.value = response
                 _status.value = CurrentStatus.DONE
             } catch (e: Exception) {

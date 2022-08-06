@@ -14,7 +14,7 @@ class DaysDetailAdapter :
     class DaysDetailViewHolder(private var binding: WeatherDetailItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(forecastday: Forecastday) {
-            binding.day = forecastday
+            binding.dayDetail = forecastday
             binding.executePendingBindings()
         }
     }
@@ -31,7 +31,7 @@ class DaysDetailAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DaysDetailViewHolder {
         return DaysDetailViewHolder(
-            WeatherDetailItemBinding.inflate(LayoutInflater.from(parent.context))
+            WeatherDetailItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 

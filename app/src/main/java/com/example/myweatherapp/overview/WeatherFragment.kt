@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -19,8 +20,12 @@ class WeatherFragment : Fragment() {
 
     private lateinit var binding: FragmentWeatherBinding
 
+    private var isWeatherGenerated = false
+
     override fun onResume() {
         super.onResume()
+        //noinspection RestrictedApi
+        (activity as AppCompatActivity).supportActionBar?.setShowHideAnimationEnabled(false) //buggy part
         (activity as AppCompatActivity).supportActionBar?.hide()
     }
 
@@ -49,11 +54,16 @@ class WeatherFragment : Fragment() {
     fun onButtonClick() {
         //apply api request w/ your location
         val customLocation = binding.editText.text.toString()
+        isWeatherGenerated = true
         sharedViewModel.getMainData(customLocation)
+        sharedViewModel.getDaysData(customLocation)
     }
 
     private fun onDetailButtonClick() {
-        findNavController().navigate(R.id.action_weatherFragment_to_weatherDetailFragment)
+        if (isWeatherGenerated)
+            findNavController().navigate(R.id.action_weatherFragment_to_weatherDetailFragment)
+        else
+            Toast.makeText(requireContext(),"Please enter location first", Toast.LENGTH_SHORT).show()
     }
 
 }

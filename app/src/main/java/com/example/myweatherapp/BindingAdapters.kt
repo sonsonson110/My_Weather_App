@@ -9,6 +9,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.myweatherapp.model.ApiData
+import com.example.myweatherapp.model.Forecastday
 import com.example.myweatherapp.overview.CurrentStatus
 import com.example.myweatherapp.overview.DaysDetailAdapter
 
@@ -36,9 +37,7 @@ fun bindImg(imgView: ImageView, imgUrl: String?) {
 }
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: ApiData?) {
+fun bindRecyclerView(recyclerView: RecyclerView, data: ArrayList<Forecastday>?) {
     val adapter = recyclerView.adapter as DaysDetailAdapter
-    val listData = data?.forecast?.forecastday
-    adapter.submitList(listData)
-    Log.d("DATAFORRECYCLERVIEW", "${listData?.get(0)}")
+    adapter.submitList(data)
 }

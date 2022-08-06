@@ -25,8 +25,10 @@ interface WeatherAPI {
         "X-RapidAPI-Key: 2a80c97814msh98c8e99b73672adp118373jsn5db1f18d86c2",
         "X-RapidAPI-Host: weatherapi-com.p.rapidapi.com"
     )
-    @GET("forecast.json?q=hanoi&days=5")
-    suspend fun getForecast() : ApiData
+    @GET("forecast.json?days=14")
+    suspend fun getForecast(
+        @Query("q") q: String
+    ) : ApiData
 }
 //build
 private val retrofit = Retrofit.Builder()

@@ -4,137 +4,174 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="day"
+            name="dayDetail"
             type="com.example.myweatherapp.model.Forecastday" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="4dp"
         android:padding="4dp">
 
-        <ImageView
-            android:id="@+id/weather_icon"
-            android:layout_width="100dp"
-            android:layout_height="150dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/_13"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp">
 
-        <TableLayout
-            android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/weather_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/weather_icon"
-            app:layout_constraintTop_toTopOf="@+id/weather_icon">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/weather_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TableRow
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="150dp"
+                    android:background="#16958383"
+                    app:imageUrl="@{dayDetail.day.condition.icon}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@drawable/_13" />
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <TableLayout
                 android:layout_width="0dp"
-                android:layout_weight="2">
+                android:layout_height="150dp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/weather_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/weather_icon"
+                app:layout_constraintTop_toTopOf="@+id/weather_icon">
 
-                <TextView
-                    android:layout_height="match_parent"
+                <TableRow
+                    android:layout_width="0dp"
+                    android:layout_weight="2">
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="right|center"
+                        android:text="Date:" />
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{dayDetail.date}"
+                        tools:text="14/10/2002" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Date" />
+                    android:background="#22958383">
 
-                <TextView
-                    android:layout_height="match_parent"
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Average temp C"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Min temp C"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Max temp C"
+                        android:textSize="13sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{dayDetail.day.avgtempC}"
+                        tools:text="16" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{dayDetail.day.mintempC}"
+                        tools:text="11" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{dayDetail.day.maxtempC}"
+                        tools:text="18" />
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    tools:text="@{day.date}"/>
-            </TableRow>
+                    android:background="#22958383">
 
-            <TableRow
-                android:layout_width="0dp"
-                android:layout_weight="1">
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Rain chance (%)"
+                        android:textSize="13sp" />
 
-                <TextView
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Average temp" />
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Humidity (%)"
+                        android:textSize="13sp" />
 
-                <TextView
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Min temp" />
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Vision (Km)"
+                        android:textSize="13sp" />
+                </TableRow>
 
-                <TextView
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Max temp" />
-            </TableRow>
+                <TableRow
+                    android:layout_width="0dp"
+                    android:layout_weight="1">
 
-            <TableRow
-                android:layout_width="0dp"
-                android:layout_weight="1">
+                    <TextView
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{dayDetail.day.dailyChanceOfRain}"
 
-                <TextView
+                        tools:text="16" />
 
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    tools:text="16" />
+                    <TextView
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{dayDetail.day.avghumidity}"
+                        tools:text="11" />
 
-                <TextView
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    tools:text="11" />
-
-                <TextView
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    tools:text="18" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="0dp"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Rain chance" />
-
-                <TextView
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Humidity" />
-
-                <TextView
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Vision" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="0dp"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    tools:text="16" />
-
-                <TextView
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    tools:text="11" />
-
-                <TextView
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    tools:text="18" />
-            </TableRow>
-        </TableLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{dayDetail.day.avgvisKm}"
+                        tools:text="18" />
+                </TableRow>
+            </TableLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>
